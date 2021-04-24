@@ -157,7 +157,7 @@ int main()
             Encode(First, Second, key);
             break;
         case 2:
-            cout << "File for dencoding: ";
+            cout << "File for decoding: ";
             cin >> First;
             cout << "File for recording: ";
             cin >> Second;
