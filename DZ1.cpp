@@ -55,12 +55,12 @@ void ReadFromFile(std::string& name, std::vector<Block>& blocks)
     }
 }
 
-void WriteToFile(std::string& name, std::vector<Block>& blocks)
+void WriteToFile(std::string& name, std::vector<Block>& blocks, bool IsBeingDecoded)
 {
     std::ofstream file(name, std::ios::binary);
     for(unsigned int i = 0; i < blocks.size(); i++)
     {
-        if (i == blocks.size() - 1)
+        if (i == blocks.size() - 1 and IsBeingDecoded)
         {
             for (unsigned int j = 0; j < BLOCK_SIZE; j++)
             {
@@ -120,7 +120,7 @@ void Encode(std::string& from, std::string& out, int& seed)
     ReadFromFile(from, Blocks);
     Gamming(Blocks, seed);
     Shifting(Blocks, 1);
-    WriteToFile(out, Blocks);
+    WriteToFile(out, Blocks, 0);
 }
 
 void Decode(std::string& from, std::string& out, int& seed)
@@ -129,7 +129,7 @@ void Decode(std::string& from, std::string& out, int& seed)
     ReadFromFile(from, Blocks);
     Shifting(Blocks, 0);
     Gamming(Blocks, seed);
-    WriteToFile(out, Blocks);
+    WriteToFile(out, Blocks, 1);
 }
 
 int main()
