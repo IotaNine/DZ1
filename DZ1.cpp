@@ -132,13 +132,29 @@ void Decode(std::string& from, std::string& out, int& seed)
     WriteToFile(out, Blocks, 1);
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    unsigned int option = 0;
-    int key;
-    std::string First;
-    std::string Second;
-    while (option != 3)
+    //unsigned int option = 0;
+    //std::string First;
+    //std::string Second;
+    if (argc != 5)
+    {
+        cout << "Wrong arguments!" << endl;
+        return 0;
+    }
+    std::string command = argv[1];
+    std::string from_file = argv[2];
+    std::string to_file = argv[3];
+    int key = atoi(argv[4]);
+    if (command == "Encode")
+    {
+        Encode(from_file, to_file, key);
+    }
+    else if (command == "Decode")
+    {
+        Decode(from_file, to_file, key);
+    }
+    /*while (option != 3)
     {
         cout << "Select option" << endl;
         cout << "1. Encode" << endl << "2. Decode" << endl << "3. Exit" << endl;
@@ -174,6 +190,6 @@ int main()
             cin >> option;
             break;
         }
-    }
+    }*/
     cout << "SHUTDOWN";
 }
